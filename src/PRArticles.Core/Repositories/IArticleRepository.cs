@@ -8,8 +8,8 @@ namespace PRArticles.Core.Repositories
     {
          Task<Article> GetAsync(Guid id);
          Task<Article> GetAsync(string title);
-         Task AddAsync(Article @article);
-         Task UpdateAsync(Article @article);
-         Task DeleteAsync(Article @article);
+         Task AddAsync(Article article);
+         Task UpdateAsync(Article article);
+         Task DeleteAsync(Article article);
     }
 }
