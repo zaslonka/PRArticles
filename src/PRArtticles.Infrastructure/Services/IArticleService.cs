@@ -10,7 +10,7 @@ namespace PRArtticles.Infrastructure.Services
          Task<ArticleDto> GetAsync(Guid id);
          Task<ArticleDto> GetAsync(string title);
          Task CreateAsync(Guid id, string title, string lead, string content, int categoryId, IEnumerable<int> tags);
-         Task UpdateAsync(Guid id, string title, string lead, string content, int categoryId, IEnumerable<int> tags);
+         Task UpdateAsync(Guid id, string title, string lead, string content);
          Task DeleteAsync(Guid id);
     }
 }

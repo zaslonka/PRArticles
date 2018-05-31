@@ -9,7 +9,12 @@ namespace PRArtticles.Infrastructure.Repositories
 {
     public class ArticleRepository : IArticleRepository
     {
-        private static readonly ISet<Article> _articles = new HashSet<Article>();
+        private static readonly ISet<Article> _articles = new HashSet<Article>
+        {
+            new Article(Guid.NewGuid(), "Article1", "Lead 1", "Content 1", 1, new List<int> {1,2,3,4,5,6} ),
+            new Article(Guid.NewGuid(), "Article2", "Lead 2", "Content 2", 2, new List<int> {7,8,9,10} )
+        };
+        
         public async Task<Article> GetAsync(Guid id)
             => await Task.FromResult(_articles.SingleOrDefault(x => x.Id == id));
         public async Task<Article> GetAsync(string title)

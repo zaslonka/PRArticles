@@ -19,11 +19,41 @@ namespace PRArticles.Core.Domain
         public Article(Guid id, string title, string lead, string content, int categoryId, IEnumerable<int> tags)
         {
             Id = id;
-            Title = title;
-            Lead = lead;
-            Content = content;
+            UpdateTitle(title);
+            UpdateLead(lead);
+            UpdateContent(content);
             CategoryId = categoryId;
             Tags = tags;
+        }
+
+        public void UpdateTitle(string title)
+        {
+            if(string.IsNullOrWhiteSpace(title))
+            {
+                throw new Exception($"Article with id: '{Id}' can not have an empty title");
+            }
+
+            Title = title;
+        }
+
+        public void UpdateLead(string lead)
+        {
+            if(string.IsNullOrWhiteSpace(lead))
+            {
+                throw new Exception($"Article with id: '{Id}' can not have an empty lead");
+            }
+
+            Lead = lead;
+        }
+
+        public void UpdateContent(string content)
+        {
+            if(string.IsNullOrWhiteSpace(content))
+            {
+                throw new Exception($"Article with id: '{Id}' can not have an empty content");
+            }
+
+            Content = content;
         }
     }
 }

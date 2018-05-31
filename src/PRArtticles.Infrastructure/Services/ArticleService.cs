@@ -2,8 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using PRArticles.Core.Domain;
 using PRArticles.Core.Repositories;
 using PRArtticles.Infrastructure.DTO;
+using PRArtticles.Infrastructure.Extensions;
 
 namespace PRArtticles.Infrastructure.Services
 {
@@ -31,17 +33,31 @@ namespace PRArtticles.Infrastructure.Services
         }
         public async Task CreateAsync(Guid id, string title, string lead, string content, int categoryId, IEnumerable<int> tags)
         {
-            throw new NotImplementedException();
+            var article = await _articleRepository.ExistsOrNotAsync(title);
+
+            article = new Article(id,title,lead,content,categoryId,tags);
+
+            await _articleRepository.AddAsync(article);
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+             var article = await _articleRepository.ExistsOrNotAsync(id);
+
+             await _articleRepository.DeleteAsync(article);
         }
 
-        public async Task UpdateAsync(Guid id, string title, string lead, string content, int categoryId, IEnumerable<int> tags)
+        public async Task UpdateAsync(Guid id, string title, string lead, string content)
         {
-            throw new NotImplementedException();
+            var article = await _articleRepository.ExistsOrNotAsync(title);
+            
+            article = await _articleRepository.ExistsOrNotAsync(id);
+
+            article.UpdateTitle(title);
+            article.UpdateLead(lead);
+            article.UpdateContent(content);
+            
+            await _articleRepository.UpdateAsync(article);
         }
     }
 }
