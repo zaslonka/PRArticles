@@ -23,7 +23,7 @@ namespace PRArtticles.Infrastructure.Extensions
             var article = await repository.GetAsync(id);
             if(article == null)
             {
-                throw new Exception($"Article with id: '{article.Id}' does not exists.");
+                throw new Exception($"Article does not exists.");
             }
 
             return article;
